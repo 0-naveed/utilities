@@ -1,0 +1,21 @@
+let allrows = document.querySelectorAll("#tradebook_table > tbody > tr")
+let compressed_list = {}
+let rows = document.querySelectorAll("#tradebook_table > tbody > tr").forEach(function(tr){
+    let stock_id = tr.querySelector("td:nth-child(1)").innerText;
+	stock_name = stock_id.match("(.*)[^a-zA-Z][BN]SE","")[1]
+	let qty = tr.querySelector("td:nth-child(6)").innerText;
+	let price = tr.querySelector("td:nth-child(7)").innerText;
+	if(Object.keys(compressed_list).indexOf(stock_name) === -1){
+		compressed_list[stock_name] = {
+			'name':stock_name,
+			'qty':0,
+			'price':0.0
+		}
+
+	}
+	compressed_list[stock_name].qty += parseInt(qty.replace(',',''))
+	compressed_list[stock_name].price += parseFloat(price.replace(',',''))
+})
+
+console.log(compressed_list)
+console.log(Object.values(compressed_list))
