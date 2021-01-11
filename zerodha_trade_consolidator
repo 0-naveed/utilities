@@ -14,8 +14,9 @@ let rows = document.querySelectorAll("#tradebook_table > tbody > tr").forEach(fu
 
 	}
 	compressed_list[stock_name].qty += parseInt(qty.replace(',',''))
-	compressed_list[stock_name].price += parseFloat(price.replace(',',''))
+	compressed_list[stock_name].price += parseFloat(price.replace(',','')) * parseInt(qty.replace(',',''))
 })
-
 console.log(compressed_list)
-console.log(Object.values(compressed_list))
+compressed_arr = Object.values(compressed_list);
+compressed_arr.forEach(function(item){item.price = item.price/item.qty})
+console.log(compressed_arr)
